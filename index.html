@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SculptLab — Precision Nutrition for Body Recomposition</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #ffffff; --surface: #f9f9f8; --border: #e8e8e5;
+      --text: #0f0f0e; --muted: #888885; --light: #b0b0ad;
+      --accent: #1a6344; --accent-bg: #f0f7f3;
+      --sans: 'DM Sans', sans-serif; --serif: 'Instrument Serif', serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.93); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 0 2rem; height: 54px; display: flex; align-items: center; justify-content: space-between; }
+    .logo { font-family: var(--sans); font-weight: 500; font-size: 0.95rem; color: var(--text); text-decoration: none; }
+    .logo b { color: var(--accent); font-weight: 500; }
+    .nav-link { font-size: 0.82rem; color: var(--muted); text-decoration: none; cursor: pointer; }
+    .nav-link:hover { color: var(--text); }
+    .hero { max-width: 680px; margin: 0 auto; padding: 5.5rem 2rem 5rem; text-align: center; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.75rem; color: var(--accent); letter-spacing: 0.04em; margin-bottom: 1.75rem; }
+    .eyebrow-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); animation: blink 2.5s ease-in-out infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+    h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(2.2rem, 5vw, 3.6rem); line-height: 1.1; color: var(--text); margin-bottom: 1.35rem; }
+    h1 i { font-style: italic; color: var(--accent); }
+    .hero-sub { font-size: 1rem; font-weight: 300; color: var(--muted); max-width: 440px; margin: 0 auto 2.5rem; line-height: 1.8; }
+    .form-row { display: flex; gap: 0.45rem; max-width: 380px; margin: 0 auto 0.75rem; }
+    input[type="email"] { flex: 1; font-family: var(--sans); font-size: 0.875rem; font-weight: 300; padding: 0.7rem 1rem; border: 1px solid var(--border); border-radius: 7px; background: var(--bg); color: var(--text); outline: none; transition: border-color 0.2s; }
+    input[type="email"]::placeholder { color: var(--light); }
+    input[type="email"]:focus { border-color: var(--accent); }
+    .btn { font-family: var(--sans); font-size: 0.85rem; font-weight: 500; padding: 0.7rem 1.25rem; background: var(--text); color: white; border: none; border-radius: 7px; cursor: pointer; white-space: nowrap; transition: opacity 0.15s; }
+    .btn:hover { opacity: 0.75; }
+    .form-note { font-size: 0.75rem; color: var(--light); }
+    .divider { width: 100%; height: 1px; background: var(--border); }
+    .stats { display: flex; justify-content: center; gap: 4rem; padding: 2.75rem 2rem; text-align: center; flex-wrap: wrap; }
+    .stat-val { font-family: var(--serif); font-size: 1.8rem; color: var(--text); display: block; line-height: 1.1; margin-bottom: 0.25rem; }
+    .stat-label { font-size: 0.78rem; color: var(--muted); font-weight: 300; }
+    .section { max-width: 640px; margin: 0 auto; padding: 5rem 2rem; }
+    .section-wide { max-width: 820px; margin: 0 auto; padding: 5rem 2rem; }
+    .label { font-size: 0.72rem; font-weight: 400; letter-spacing: 0.09em; text-transform: uppercase; color: var(--light); display: block; margin-bottom: 1.1rem; }
+    h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(1.7rem, 3.5vw, 2.4rem); line-height: 1.2; margin-bottom: 1.15rem; }
+    .body-text { font-size: 0.95rem; font-weight: 300; color: var(--muted); line-height: 1.85; }
+    .callout { margin-top: 1.75rem; padding: 1.15rem 1.4rem; background: var(--accent-bg); border-radius: 10px; font-size: 0.9rem; font-weight: 300; color: var(--text); line-height: 1.8; }
+    .steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 2.5rem; margin-top: 3rem; }
+    .step-num { font-size: 0.72rem; color: var(--light); letter-spacing: 0.06em; display: block; margin-bottom: 0.75rem; }
+    .step h3 { font-family: var(--serif); font-weight: 400; font-size: 1.05rem; margin-bottom: 0.55rem; }
+    .step p { font-size: 0.84rem; font-weight: 300; color: var(--muted); line-height: 1.75; }
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-top: 2.75rem; }
+    .card-header { padding: 0.9rem 1.4rem; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+    .card-title { font-size: 0.83rem; font-weight: 500; color: var(--text); }
+    .card-meta { font-size: 0.72rem; color: var(--light); }
+    .card-body { display: grid; grid-template-columns: 1fr 1fr; }
+    .card-col { padding: 1.35rem; }
+    .card-col + .card-col { border-left: 1px solid var(--border); }
+    .col-label { font-size: 0.69rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--light); display: block; margin-bottom: 1.1rem; }
+    .batch-row { display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 0; border-bottom: 1px solid var(--border); gap: 0.75rem; }
+    .batch-row:last-child { border-bottom: none; }
+    .batch-name { font-size: 0.84rem; font-weight: 400; color: var(--text); }
+    .batch-detail { font-size: 0.72rem; color: var(--muted); font-weight: 300; margin-top: 0.1rem; }
+    .tag { font-size: 0.65rem; font-weight: 400; letter-spacing: 0.04em; text-transform: uppercase; padding: 0.2rem 0.55rem; border-radius: 4px; white-space: nowrap; flex-shrink: 0; }
+    .tag-p { background: #fef3e2; color: #92400e; }
+    .tag-c { background: #eff6ff; color: #1e40af; }
+    .tag-v { background: var(--accent-bg); color: var(--accent); }
+    .week-row { display: grid; grid-template-columns: 40px 1fr auto; gap: 0.6rem; align-items: center; padding: 0.55rem 0; border-bottom: 1px solid var(--border); }
+    .week-row:last-child { border-bottom: none; }
+    .week-day { font-size: 0.69rem; color: var(--light); letter-spacing: 0.04em; text-transform: uppercase; }
+    .week-tags { display: flex; flex-wrap: wrap; gap: 0.25rem; }
+    .combo-tag { font-size: 0.72rem; font-weight: 300; color: var(--text); background: var(--bg); border: 1px solid var(--border); border-radius: 4px; padding: 0.12rem 0.45rem; }
+    .week-kcal { font-size: 0.72rem; color: var(--muted); text-align: right; white-space: nowrap; }
+    .card-foot { border-top: 1px solid var(--border); padding: 0.9rem 1.4rem; display: flex; gap: 2rem; flex-wrap: wrap; align-items: flex-end; }
+    .macro-val { font-family: var(--serif); font-size: 1.2rem; color: var(--text); display: block; line-height: 1.1; }
+    .macro-label { font-size: 0.69rem; color: var(--muted); font-weight: 300; }
+    .features { margin-top: 3rem; }
+    .feat { display: grid; grid-template-columns: 2fr 3fr; gap: 2.5rem; padding: 1.75rem 0; border-top: 1px solid var(--border); align-items: start; }
+    .feat:last-child { border-bottom: 1px solid var(--border); }
+    .feat h3 { font-family: var(--serif); font-weight: 400; font-size: 1rem; line-height: 1.4; }
+    .feat p { font-size: 0.84rem; font-weight: 300; color: var(--muted); line-height: 1.8; }
+    .faq { margin-top: 2.75rem; }
+    .faq-item { border-top: 1px solid var(--border); }
+    .faq-item:last-child { border-bottom: 1px solid var(--border); }
+    .faq-q { width: 100%; text-align: left; padding: 1rem 0; background: none; border: none; cursor: pointer; font-family: var(--sans); font-size: 0.9rem; font-weight: 400; color: var(--text); display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+    .faq-icon { font-size: 1rem; color: var(--light); transition: transform 0.2s ease; flex-shrink: 0; }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+    .faq-item.open .faq-a { max-height: 200px; }
+    .faq-a-inner { padding-bottom: 1rem; font-size: 0.84rem; font-weight: 300; color: var(--muted); line-height: 1.8; }
+    .cta { max-width: 480px; margin: 0 auto; padding: 5.5rem 2rem 6.5rem; text-align: center; }
+    .cta p { font-size: 0.92rem; font-weight: 300; color: var(--muted); margin-bottom: 1.75rem; line-height: 1.8; }
+    footer { border-top: 1px solid var(--border); padding: 1.35rem 2rem; display: flex; align-items: center; justify-content: space-between; }
+    .footer-logo { font-size: 0.85rem; font-weight: 400; color: var(--text); }
+    .footer-logo b { color: var(--accent); font-weight: 500; }
+    .footer-copy { font-size: 0.75rem; color: var(--light); }
+    @media (max-width: 600px) {
+      .stats { gap: 2rem; justify-content: flex-start; }
+      .steps { grid-template-columns: 1fr; gap: 1.75rem; }
+      .card-body { grid-template-columns: 1fr; }
+      .card-col + .card-col { border-left: none; border-top: 1px solid var(--border); }
+      .feat { grid-template-columns: 1fr; gap: 0.4rem; }
+      .form-row { flex-direction: column; }
+      footer { flex-direction: column; gap: 0.4rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+<nav>
+  <a href="#" class="logo">Sculpt<b>Lab</b></a>
+  <span class="nav-link" onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})">Join waitlist →</span>
+</nav>
+<section class="hero" id="waitlist">
+  <div class="eyebrow"><span class="eyebrow-dot"></span> Now accepting early access</div>
+  <h1>Nutrition built for<br>the body you're <i>building</i></h1>
+  <p class="hero-sub">Personalised batch meal prep plans calculated to your exact macros and preferences — then recalibrated automatically as your body composition changes.</p>
+  <div class="form-row">
+    <input type="email" id="email-hero" placeholder="your@email.com" />
+    <button class="btn" onclick="handleSubmit('hero')">Get early access</button>
+  </div>
+</section>
+<div class="divider"></div>
+<div class="stats">
+  <div><span class="stat-val">100%</span><span class="stat-label">Personalised to your body</span></div>
+  <div><span class="stat-val">1× / week</span><span class="stat-label">Cook once, eat all week</span></div>
+  <div><span class="stat-val">Live</span><span class="stat-label">Adapts as you change</span></div>
+</div>
+<div class="divider"></div>
+<section class="section">
+  <span class="label">The problem</span>
+  <h2>Generic plans stop working the moment your body starts changing</h2>
+  <p class="body-text">Most nutrition apps hand you a static template built for an average person or doesn't adapt well. But as your body composition changes, your calorie needs, macro ratios, and portion sizes all shift.</p>
+  <div class="callout">SculptLab generates a batch prep plan from scratch based on your current body composition, then recalculates every time your stats update — so you're always eating to optimize your body towards a lean build.</div>
+</section>
+<div class="divider"></div>
+<section class="section-wide">
+  <span class="label">How it works</span>
+  <h2>Three steps to a week of eating right</h2>
+  <div class="steps">
+    <div class="step"><span class="step-num">01</span><h3>Tell us about your body</h3><p>Enter your weight, body fat %, activity level, and food preferences. Takes two minutes.</p></div>
+    <div class="step"><span class="step-num">02</span><h3>Get your Sunday prep list</h3><p>We calculate your TDEE and macro split, then generate a batch prep plan — proteins, carbs, and veg to cook once and portion for the week.</p></div>
+    <div class="step"><span class="step-num">03</span><h3>Update and recalibrate</h3><p>Log new measurements and your plan rebuilds automatically. No guesswork, no stale numbers.</p></div>
+  </div>
+</section>
+<div class="divider"></div>
+<section class="section-wide">
+  <span class="label">Sample output</span>
+  <h2>Cook once on Sunday.<br>Eat right all week.</h2>
+  <div class="card">
+    <div class="card-header"><span class="card-title">Batch Prep Plan · Week 3</span><span class="card-meta">Recalibrated after update — 18 Mar 2026</span></div>
+    <div class="card-body">
+      <div class="card-col">
+        <span class="col-label">Sunday prep list</span>
+        <div class="batch-row"><div><div class="batch-name">Baked chicken thighs</div><div class="batch-detail">1.4 kg · garlic & paprika · 35 min @ 200°C</div></div><span class="tag tag-p">Protein</span></div>
+        <div class="batch-row"><div><div class="batch-name">Lean beef mince</div><div class="batch-detail">600 g · onion & cumin · 15 min</div></div><span class="tag tag-p">Protein</span></div>
+        <div class="batch-row"><div><div class="batch-name">Brown rice</div><div class="batch-detail">500 g dry · 30 min</div></div><span class="tag tag-c">Carb</span></div>
+        <div class="batch-row"><div><div class="batch-name">Roasted broccoli & capsicum</div><div class="batch-detail">800 g · olive oil, salt · 25 min @ 200°C</div></div><span class="tag tag-v">Veg</span></div>
+        <div class="batch-row"><div><div class="batch-name">Baby spinach</div><div class="batch-detail">200 g · no prep, use raw</div></div><span class="tag tag-v">Veg</span></div>
+      </div>
+      <div class="card-col">
+        <span class="col-label">This week's meals</span>
+        <div class="week-row"><span class="week-day">Mon</span><div class="week-tags"><span class="combo-tag">Chicken</span><span class="combo-tag">Rice</span><span class="combo-tag">Broccoli</span></div><span class="week-kcal">~520 kcal</span></div>
+        <div class="week-row"><span class="week-day">Tue</span><div class="week-tags"><span class="combo-tag">Beef</span><span class="combo-tag">Rice</span><span class="combo-tag">Spinach</span></div><span class="week-kcal">~540 kcal</span></div>
+        <div class="week-row"><span class="week-day">Wed</span><div class="week-tags"><span class="combo-tag">Chicken</span><span class="combo-tag">Capsicum</span><span class="combo-tag">Spinach</span></div><span class="week-kcal">~460 kcal</span></div>
+        <div class="week-row"><span class="week-day">Thu</span><div class="week-tags"><span class="combo-tag">Beef</span><span class="combo-tag">Rice</span><span class="combo-tag">Broccoli</span></div><span class="week-kcal">~550 kcal</span></div>
+        <div class="week-row"><span class="week-day">Fri</span><div class="week-tags"><span class="combo-tag">Chicken</span><span class="combo-tag">Rice</span><span class="combo-tag">Capsicum</span></div><span class="week-kcal">~510 kcal</span></div>
+      </div>
+    </div>
+    <div class="card-foot">
+      <div><span class="macro-val">2,100</span><span class="macro-label">kcal / day</span></div>
+      <div><span class="macro-val">185 g</span><span class="macro-label">Protein</span></div>
+      <div><span class="macro-val">210 g</span><span class="macro-label">Carbs</span></div>
+      <div><span class="macro-val">58 g</span><span class="macro-label">Fat</span></div>
+      <div style="margin-left:auto"><span class="macro-val">~90 min</span><span class="macro-label">Total Sunday prep</span></div>
+    </div>
+  </div>
+</section>
+<div class="divider"></div>
+<section class="section">
+  <span class="label">Features</span>
+  <h2>Built differently from every other meal planner</h2>
+  <div class="features">
+    <div class="feat"><h3>Macro-precise generation</h3><p>Every plan is built to hit your specific protein, carb, and fat targets — calculated from your current TDEE and recomposition goals, not a generic template.</p></div>
+    <div class="feat"><h3>Food preference filtering</h3><p>Tell us what you like, dislike, or can't eat. Your plan will never include something that doesn't fit — allergies, dislikes, and dietary styles all respected.</p></div>
+    <div class="feat"><h3>Adaptive recalibration</h3><p>Log new measurements and your plan rebuilds automatically. No more guessing whether your old plan still applies to the body you have now.</p></div>
+    <div class="feat"><h3>Cook once, eat all week</h3><p>One Sunday batch prep session — typically under 90 minutes — covers all your meals for the week. Mix and match components daily without cooking again.</p></div>
+  </div>
+</section>
+<div class="divider"></div>
+<section class="section">
+  <span class="label">FAQ</span>
+  <h2>Common questions</h2>
+  <div class="faq">
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How are my macros and calories calculated?<span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">We use your weight, body fat %, activity level, and goal to calculate your TDEE and optimal macro split. As your body composition changes and you log new stats, these targets update automatically.</div></div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Is the batch prep simple enough for someone who doesn't cook much?<span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Yes — every prep list uses simple methods (bake, pan-cook, steam) with common supermarket ingredients. If you can turn on an oven, you can follow the plan. No special equipment or experience needed.</div></div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">When does SculptLab launch and what will it cost?<span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">We're targeting a launch in the coming months. Early members who join the waitlist now will get priority access.</div></div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Does it work for vegetarian or vegan diets?<span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Yes. SculptLab supports any dietary preference including vegetarian, vegan, gluten-free, and dairy-free. All plans are generated to your constraints — nothing generic gets slipped in.</div></div></div>
+  </div>
+</section>
+<div class="divider"></div>
+<section class="cta">
+  <span class="label">Get priority access</span>
+  <h2>Start eating for the body you're building</h2>
+  <p>Join the waitlist and get priority access at a founding member rate when we launch.</p>
+  <div class="form-row" style="justify-content:center">
+    <input type="email" id="email-footer" placeholder="your@email.com" />
+    <button class="btn" onclick="handleSubmit('footer')">Join waitlist</button>
+  </div>
+</section>
+<footer>
+  <span class="footer-logo">Sculpt<b>Lab</b></span>
+  <span class="footer-copy">© 2026 SculptLab · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9cf4f9f0f0f3dcefffe9f0ece8f0fdfeb2fff3">[email&#160;protected]</a></span>
+</footer>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  }
+  function handleSubmit(id) {
+    const input = document.getElementById('email-' + id);
+    const email = input.value.trim();
+    if (!email || !email.includes('@') || !email.includes('.')) {
+      input.style.borderColor = '#dc2626';
+      input.focus();
+      setTimeout(() => input.style.borderColor = '', 1500);
+      return;
+    }
+    window.location.href = 'thank-you.html?email=' + encodeURIComponent(email);
+  }
+</script>
+</body>
+</html>

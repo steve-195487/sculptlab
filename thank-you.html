@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SculptLab — You're on the list</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #ffffff; --surface: #f9f9f8; --border: #e8e8e5;
+      --text: #0f0f0e; --muted: #888885; --light: #b0b0ad;
+      --accent: #1a6344; --accent-bg: #f0f7f3;
+      --sans: 'DM Sans', sans-serif; --serif: 'Instrument Serif', serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; min-height: 100vh; }
+
+    nav { border-bottom: 1px solid var(--border); padding: 0 2rem; height: 54px; display: flex; align-items: center; }
+    .logo { font-family: var(--sans); font-weight: 500; font-size: 0.95rem; color: var(--text); text-decoration: none; }
+    .logo b { color: var(--accent); font-weight: 500; }
+
+    .page { max-width: 580px; margin: 0 auto; padding: 5rem 2rem 6rem; }
+
+    .check-circle {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--accent-bg); border: 1px solid rgba(26,99,68,0.2);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.75rem; font-size: 1.1rem;
+    }
+
+    .label { font-size: 0.72rem; font-weight: 400; letter-spacing: 0.09em; text-transform: uppercase; color: var(--light); display: block; margin-bottom: 1rem; }
+    h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(1.9rem, 4vw, 2.8rem); line-height: 1.15; margin-bottom: 0.85rem; }
+    .intro { font-size: 0.95rem; font-weight: 300; color: var(--muted); line-height: 1.8; margin-bottom: 2.75rem; }
+    .intro span { color: var(--text); font-weight: 400; }
+
+    .divider { width: 100%; height: 1px; background: var(--border); margin-bottom: 2.75rem; }
+
+    .survey-label { font-size: 0.72rem; font-weight: 400; letter-spacing: 0.09em; text-transform: uppercase; color: var(--light); display: block; margin-bottom: 1.5rem; }
+    .q-group { margin-bottom: 2rem; }
+    .q-text { font-size: 0.95rem; font-weight: 400; color: var(--text); margin-bottom: 0.6rem; line-height: 1.5; }
+    .q-hint { font-size: 0.78rem; font-weight: 300; color: var(--light); margin-bottom: 0.75rem; display: block; }
+
+    textarea {
+      width: 100%; font-family: var(--sans); font-size: 0.875rem; font-weight: 300;
+      color: var(--text); background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; padding: 0.85rem 1rem; resize: vertical; min-height: 72px;
+      outline: none; line-height: 1.7; transition: border-color 0.2s;
+    }
+    textarea::placeholder { color: var(--light); }
+    textarea:focus { border-color: var(--accent); }
+
+    .submit-row { display: flex; align-items: center; justify-content: space-between; margin-top: 2.5rem; gap: 1rem; flex-wrap: wrap; }
+    .btn { font-family: var(--sans); font-size: 0.875rem; font-weight: 500; padding: 0.75rem 1.5rem; background: var(--text); color: white; border: none; border-radius: 7px; cursor: pointer; transition: opacity 0.15s; }
+    .btn:hover { opacity: 0.75; }
+    .skip { font-size: 0.78rem; color: var(--light); cursor: pointer; }
+    .skip:hover { color: var(--muted); }
+
+    .success-screen { display: none; text-align: center; padding: 4rem 0; }
+    .success-screen.show { display: block; }
+    .success-screen h2 { font-family: var(--serif); font-weight: 400; font-size: 1.8rem; margin-bottom: 0.75rem; }
+    .success-screen p { font-size: 0.92rem; font-weight: 300; color: var(--muted); line-height: 1.8; }
+
+    footer { border-top: 1px solid var(--border); padding: 1.35rem 2rem; display: flex; align-items: center; justify-content: space-between; }
+    .footer-logo { font-size: 0.85rem; font-weight: 400; color: var(--text); }
+    .footer-logo b { color: var(--accent); font-weight: 500; }
+    .footer-copy { font-size: 0.75rem; color: var(--light); }
+
+    @media (max-width: 500px) {
+      .page { padding: 3.5rem 1.5rem 5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">Sculpt<b>Lab</b></a>
+</nav>
+
+<div class="page">
+
+  <div class="check-circle">✓</div>
+  <span class="label">You're on the list</span>
+  <h1>Thanks for signing up</h1>
+  <p class="intro">You'll get priority access when we launch. In the meantime — <span>two minutes of your time</span> would help us build this for you. All questions are optional.</p>
+
+  <div class="divider"></div>
+
+  <form id="survey-form" name="sculptlab-survey" method="POST" data-netlify="true">
+    <input type="hidden" name="form-name" value="sculptlab-survey" />
+
+    <span class="survey-label">Help us build this for you</span>
+
+    <div class="q-group">
+      <p class="q-text">How do you currently plan your meals for the week?</p>
+      <textarea name="meal-planning" placeholder="e.g. I don't — I just decide on the day, I roughly plan but don't track anything, I use MyFitnessPal…"></textarea>
+    </div>
+
+    <div class="q-group">
+      <p class="q-text">What's the biggest thing stopping you from eating consistently to reach your fitness goals?</p>
+      <textarea name="biggest-barrier" placeholder="e.g. No time to cook, I don't know what to eat for my goals, tracking every gram is exhausting…"></textarea>
+    </div>
+
+    <div class="q-group">
+      <p class="q-text">What's your primary goal right now?</p>
+      <textarea name="primary-goal" placeholder="e.g. I need to lose fat while keeping muscle, I'm trying to bulk up, I just want to eat better around training…"></textarea>
+    </div>
+
+    <div class="q-group">
+      <p class="q-text">What do you currently spend per month on nutrition-related products or services?</p>
+      <span class="q-hint">Think: apps, supplements, meal plans, a PT or dietitian, recipe books, etc. Even a rough estimate helps.</span>
+      <textarea name="current-nutrition-spend" placeholder="e.g. About $30/month on protein powder and a calorie tracking app, nothing at the moment…"></textarea>
+    </div>
+
+    <div class="q-group">
+      <p class="q-text">Anything else you'd want SculptLab to know?</p>
+      <textarea name="open-feedback" placeholder="e.g. I have a nut allergy, I travel a lot for work, I've tried X and it didn't work because…"></textarea>
+    </div>
+
+    <div class="submit-row">
+      <span class="skip" onclick="skipSurvey()">Skip survey</span>
+      <button type="submit" class="btn">Submit →</button>
+    </div>
+  </form>
+
+  <div class="success-screen" id="success-screen">
+    <div class="check-circle" style="margin: 0 auto 1.5rem;">✓</div>
+    <h2>Thank you — that really helps.</h2>
+    <p>You'll hear from us when we're ready to launch.<br>Keep an eye on your inbox.</p>
+  </div>
+
+</div>
+
+<footer>
+  <span class="footer-logo">Sculpt<b>Lab</b></span>
+  <span class="footer-copy">© 2026 SculptLab · hello@sculptlab.co</span>
+</footer>
+
+<script>
+  document.getElementById('survey-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const formData = new FormData(this);
+    fetch('/', { method: 'POST', body: formData })
+      .then(() => showSuccess())
+      .catch(() => showSuccess()); // Show success even if fetch fails (e.g. local preview)
+  });
+
+  function showSuccess() {
+    document.getElementById('survey-form').style.display = 'none';
+    document.getElementById('success-screen').classList.add('show');
+  }
+
+  function skipSurvey() {
+    showSuccess();
+  }
+</script>
+
+</body>
+</html>
