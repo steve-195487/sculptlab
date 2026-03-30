@@ -90,6 +90,7 @@
 
   <form id="survey-form" name="sculptlab-survey" method="POST" data-netlify="true">
     <input type="hidden" name="form-name" value="sculptlab-survey" />
+    <input type="hidden" name="email" id="captured-email" value="" />
 
     <span class="survey-label">Help us build this for you</span>
 
@@ -139,6 +140,10 @@
 </footer>
 
 <script>
+  // Pull the email from the URL and put it in the hidden field
+const params = new URLSearchParams(window.location.search);
+const email = params.get('email');
+if (email) document.getElementById('captured-email').value = email;
   document.getElementById('survey-form').addEventListener('submit', function(e) {
     e.preventDefault();
     const formData = new FormData(this);
