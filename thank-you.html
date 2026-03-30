@@ -141,9 +141,22 @@
 
 <script>
   // Pull the email from the URL and put it in the hidden field
-const params = new URLSearchParams(window.location.search);
-const email = params.get('email');
-if (email) document.getElementById('captured-email').value = email;
+  const params = new URLSearchParams(window.location.search);
+  const email = params.get('email');
+  if (email) document.getElementById('captured-email').value = email;
+
+  // Silently submit just the email to Netlify immediately on page load
+  if (email) {
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        'form-name': 'sculptlab-emails',
+        'email': email
+      })
+    });
+  }
+
   document.getElementById('survey-form').addEventListener('submit', function(e) {
     e.preventDefault();
     const formData = new FormData(this);
@@ -161,6 +174,10 @@ if (email) document.getElementById('captured-email').value = email;
     showSuccess();
   }
 </script>
+
+<form name="sculptlab-emails" data-netlify="true" hidden>
+  <input type="hidden" name="email" />
+</form>
 
 </body>
 </html>
